@@ -1,0 +1,8 @@
+git+https://github.com/Linux-cpp-lisp/pytorch_ema@context_manager#egg=torch_ema
+git+https://github.com/mir-group/nequip.git@v0.3.3#egg=nequip
+e3nn==0.3.3
+black
+flake8
+isort
+pre-commit
+pytest

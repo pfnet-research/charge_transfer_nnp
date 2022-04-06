@@ -1,0 +1,63 @@
+# general
+root: results/NaCl/baseline
+run_name: baseline
+workdir: results/NaCl/baseline
+requeue: true
+seed: 0
+
+# data
+dataset: estorch.datasets.fghdnnp.FGHDNNPDataset
+dataset_file_name: datasets/NaCl
+global_rescale_scale: dataset_force_rms
+
+# network
+model_builder: estorch.models.ForceChargeModel
+use_charge: false
+use_ele: false
+pbc: false
+
+r_max: 4.0
+
+num_layers: 6
+chemical_embedding_irreps_out: 64x0e
+feature_irreps_hidden: 32x0e + 32x1e  # without parity
+irreps_edge_sh: 0e + 1o
+conv_to_output_hidden_irreps_out: 16x0e
+
+# radial network
+num_basis: 8
+invariant_layers: 1
+invariant_neurons: 8
+use_sc: true  # use self-connection
+
+# logging
+wandb: false
+verbose: debug
+
+# training
+n_train: 4000
+n_val: 500
+learning_rate: 0.01
+batch_size: 5
+max_epochs: 10000
+
+# TODO
+early_stopping_patiences:
+  Validation_loss: 2500
+
+# loss function
+loss_coeffs: forces
+
+# optimizer
+optimizer_name: Adam
+optimizer_amsgrad: true
+optimizer_betas: !!python/tuple
+  - 0.9
+  - 0.999
+optimizer_eps: 1.0e-08
+optimizer_weight_decay: 0
+
+# lr scheduler
+lr_scheduler_name: ReduceLROnPlateau
+lr_scheduler_patience: 50
+lr_scheduler_factor: 0.8

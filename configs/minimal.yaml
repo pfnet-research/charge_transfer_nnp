@@ -1,0 +1,41 @@
+# general
+root: results/Carbon_chain/minimal
+run_name: minimal
+seed: 0
+regression_by_species: true
+
+# data
+dataset: estorch.datasets.fghdnnp.FGHDNNPDataset
+dataset_file_name: datasets/Carbon_chain
+
+# network
+model_builder: estorch.models.ForceChargeModel
+use_charge: true
+use_qeq: true
+
+num_basis: 8
+r_max: 5.0
+chemical_embedding_irreps_out: 7x0e
+irreps_edge_sh: 0e + 1o
+conv_to_output_hidden_irreps_out: 16x0e
+feature_irreps_hidden: 16x0o + 16x0e + 16x1o + 16x1e + 16x2o + 16x2e
+model_uniform_init: false
+
+# logging
+wandb: false
+verbose: debug
+
+# training
+n_train: 6
+n_val: 6
+batch_size: 2
+max_epochs: 100
+
+# loss function
+loss_coeffs:
+  forces: 100
+  total_energy: 1
+  charges: 1
+
+# optimizer
+optimizer_name: Adam
